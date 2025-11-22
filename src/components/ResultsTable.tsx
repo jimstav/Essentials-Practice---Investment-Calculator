@@ -1,3 +1,5 @@
+import { formatter } from '../util/investment';
+
 interface ResultsTableProps {
   results: {
     year: number;
@@ -29,10 +31,10 @@ const ResultsTable = ({
         {results.map((result, index) => (
           <tr>
             <td>{result.year}</td>
-            <td>{result.valueEndOfYear}</td>
-            <td>{result.interest}</td>
-            <td>{totalInterest[index]}</td>
-            <td>{totalInvestedCapital[index]}</td>
+            <td>{formatter.format(result.valueEndOfYear)}</td>
+            <td>{formatter.format(result.interest)}</td>
+            <td>{formatter.format(totalInterest[index])}</td>
+            <td>{formatter.format(totalInvestedCapital[index])}</td>
           </tr>
         ))}
       </tbody>
