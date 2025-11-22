@@ -1,15 +1,24 @@
-import { useState } from 'react';
+interface UserInputProps {
+  initialInvestment?: number;
+  annualInvestment?: number;
+  expectedReturn?: number;
+  duration?: number;
+  onInitialInvestmentChanged: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onAnnualInvestmentChanged: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onExpectedReturnChanged: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onDurationChanged: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
-type investmentInput = number | undefined;
-
-const UserInput = () => {
-  const [initialInvestment, setInitialInvestment] =
-    useState<investmentInput>(undefined);
-  const [annualInvestment, setAnnualInvestment] =
-    useState<investmentInput>(undefined);
-  const [expectedReturn, setExpectedReturn] =
-    useState<investmentInput>(undefined);
-  const [duration, setDuration] = useState<investmentInput>(undefined);
+const UserInput = ({
+  initialInvestment,
+  annualInvestment,
+  expectedReturn,
+  duration,
+  onInitialInvestmentChanged,
+  onAnnualInvestmentChanged,
+  onExpectedReturnChanged,
+  onDurationChanged,
+}: UserInputProps) => {
   return (
     <div id="user-input">
       <div className="input-group">
@@ -18,7 +27,7 @@ const UserInput = () => {
           <input
             type="number"
             value={initialInvestment}
-            onChange={(e) => setInitialInvestment(parseInt(e.target.value))}
+            onChange={onInitialInvestmentChanged}
           />
         </div>
         <div>
@@ -26,7 +35,7 @@ const UserInput = () => {
           <input
             type="number"
             value={annualInvestment}
-            onChange={(e) => setAnnualInvestment(parseInt(e.target.value))}
+            onChange={onAnnualInvestmentChanged}
           />
         </div>
       </div>
@@ -37,7 +46,7 @@ const UserInput = () => {
             type="number"
             step=".01"
             value={expectedReturn}
-            onChange={(e) => setExpectedReturn(parseFloat(e.target.value))}
+            onChange={onExpectedReturnChanged}
           />
         </div>
         <div>
@@ -45,7 +54,8 @@ const UserInput = () => {
           <input
             type="number"
             value={duration}
-            onChange={(e) => setDuration(parseInt(e.target.value))}
+            min={1}
+            onChange={onDurationChanged}
           />
         </div>
       </div>
