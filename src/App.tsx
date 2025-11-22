@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Header from './components/Header';
 import UserInput from './components/UserInput';
 import { calculateInvestmentResults } from './util/investment';
+import ResultsTable from './components/ResultsTable';
 
 type InvestmentInput = number | undefined;
 
@@ -36,7 +37,17 @@ function App() {
     duration,
   });
 
-  console.log(results);
+  const totalInterest: number[] = [];
+  const totalInvestedCapital: number[] = [];
+
+  if (results.length > 0 && initialInvestment && annualInvestment) {
+    totalInterest[0] = results[0].interest;
+    totalInvestedCapital[0] = initialInvestment + annualInvestment;
+    for (let i = 1; i < results.length; i++) {
+      totalInterest[i] = totalInterest[i - 1] + results[i].interest;
+      totalInvestedCapital[i] = totalInvestedCapital[i - 1] + annualInvestment;
+    }
+  }
 
   return (
     <>
@@ -50,6 +61,11 @@ function App() {
         onAnnualInvestmentChanged={handleAnnualInvestmentChanged}
         onExpectedReturnChanged={handleExpectedReturnChanged}
         onDurationChanged={handleDurationChanged}
+      />
+      <ResultsTable
+        results={results}
+        totalInterest={totalInterest}
+        totalInvestedCapital={totalInvestedCapital}
       />
     </>
   );
