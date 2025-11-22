@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Header from './components/Header';
 import UserInput from './components/UserInput';
+import { calculateInvestmentResults } from './util/investment';
 
 type InvestmentInput = number | undefined;
 
@@ -27,6 +28,15 @@ function App() {
 
   const handleDurationChanged = (e: React.ChangeEvent<HTMLInputElement>) =>
     setDuration(parseInt(e.target.value));
+
+  const results = calculateInvestmentResults({
+    initialInvestment,
+    annualInvestment,
+    expectedReturn,
+    duration,
+  });
+
+  console.log(results);
 
   return (
     <>
