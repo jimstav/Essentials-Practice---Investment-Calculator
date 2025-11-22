@@ -1,12 +1,8 @@
-import { formatter } from '../util/investment';
+import React from 'react';
+import { formatter, YearResult } from '../util/investment';
 
 interface ResultsTableProps {
-  results: {
-    year: number;
-    interest: number;
-    valueEndOfYear: number;
-    annualInvestment: number;
-  }[];
+  results: YearResult[];
   totalInterest: number[];
   totalInvestedCapital: number[];
 }

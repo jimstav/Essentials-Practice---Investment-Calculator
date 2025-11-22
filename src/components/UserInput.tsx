@@ -1,3 +1,5 @@
+import React from 'react';
+
 interface UserInputProps {
   initialInvestment?: number;
   annualInvestment?: number;

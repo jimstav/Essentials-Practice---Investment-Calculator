@@ -1,7 +1,8 @@
+import React from 'react';
 import { useState } from 'react';
 import Header from './components/Header';
 import UserInput from './components/UserInput';
-import { calculateInvestmentResults } from './util/investment';
+import { calculateInvestmentResults, YearResult } from './util/investment';
 import ResultsTable from './components/ResultsTable';
 
 type InvestmentInput = number | undefined;
@@ -30,12 +31,15 @@ function App() {
   const handleDurationChanged = (e: React.ChangeEvent<HTMLInputElement>) =>
     setDuration(parseInt(e.target.value));
 
-  const results = calculateInvestmentResults({
-    initialInvestment,
-    annualInvestment,
-    expectedReturn,
-    duration,
-  });
+  let results: YearResult[] = [];
+  if (initialInvestment && annualInvestment && expectedReturn && duration) {
+    results = calculateInvestmentResults({
+      initialInvestment,
+      annualInvestment,
+      expectedReturn,
+      duration,
+    });
+  }
 
   const totalInterest: number[] = [];
   const totalInvestedCapital: number[] = [];
