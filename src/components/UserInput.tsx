@@ -22,46 +22,58 @@ const UserInput = ({
   onDurationChanged,
 }: UserInputProps) => {
   return (
-    <div id="user-input">
+    <section id="user-input">
       <div className="input-group">
         <div>
-          <label>Initial Investment</label>
-          <input
-            type="number"
-            value={initialInvestment}
-            onChange={onInitialInvestmentChanged}
-          />
+          <p>
+            <label>Initial Investment</label>
+            <input
+              type="number"
+              value={initialInvestment}
+              onChange={onInitialInvestmentChanged}
+              required
+            />
+          </p>
         </div>
         <div>
-          <label>Annual Investment</label>
-          <input
-            type="number"
-            value={annualInvestment}
-            onChange={onAnnualInvestmentChanged}
-          />
+          <p>
+            <label>Annual Investment</label>
+            <input
+              type="number"
+              value={annualInvestment}
+              onChange={onAnnualInvestmentChanged}
+              required
+            />
+          </p>
         </div>
       </div>
       <div className="input-group">
         <div>
-          <label>Expected Return</label>
-          <input
-            type="number"
-            step=".01"
-            value={expectedReturn}
-            onChange={onExpectedReturnChanged}
-          />
+          <p>
+            <label>Expected Return</label>
+            <input
+              type="number"
+              step=".01"
+              value={expectedReturn}
+              onChange={onExpectedReturnChanged}
+              required
+            />
+          </p>
         </div>
         <div>
-          <label>Duration</label>
-          <input
-            type="number"
-            value={duration}
-            min={1}
-            onChange={onDurationChanged}
-          />
+          <p>
+            <label>Duration</label>
+            <input
+              type="number"
+              value={duration}
+              min={1}
+              onChange={onDurationChanged}
+              required
+            />
+          </p>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
