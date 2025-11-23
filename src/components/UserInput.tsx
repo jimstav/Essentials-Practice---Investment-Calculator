@@ -1,26 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { UserInputArgs } from '../util/investment';
 
 interface UserInputProps {
-  initialInvestment?: number;
-  annualInvestment?: number;
-  expectedReturn?: number;
-  duration?: number;
-  onInitialInvestmentChanged: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onAnnualInvestmentChanged: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onExpectedReturnChanged: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onDurationChanged: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (inputIdentifier: string, newValue: number) => void;
+  userInput: UserInputArgs;
 }
 
-const UserInput = ({
-  initialInvestment,
-  annualInvestment,
-  expectedReturn,
-  duration,
-  onInitialInvestmentChanged,
-  onAnnualInvestmentChanged,
-  onExpectedReturnChanged,
-  onDurationChanged,
-}: UserInputProps) => {
+const UserInput = ({ onChange, userInput }: UserInputProps) => {
   return (
     <section id="user-input">
       <div className="input-group">
@@ -29,8 +15,10 @@ const UserInput = ({
             <label>Initial Investment</label>
             <input
               type="number"
-              value={initialInvestment}
-              onChange={onInitialInvestmentChanged}
+              value={userInput.initialInvestment}
+              onChange={(e) =>
+                onChange('initialInvestment', parseInt(e.target.value))
+              }
               required
             />
           </p>
@@ -40,8 +28,10 @@ const UserInput = ({
             <label>Annual Investment</label>
             <input
               type="number"
-              value={annualInvestment}
-              onChange={onAnnualInvestmentChanged}
+              value={userInput.annualInvestment}
+              onChange={(e) =>
+                onChange('annualInvestment', parseInt(e.target.value))
+              }
               required
             />
           </p>
@@ -54,8 +44,10 @@ const UserInput = ({
             <input
               type="number"
               step=".01"
-              value={expectedReturn}
-              onChange={onExpectedReturnChanged}
+              value={userInput.expectedReturn}
+              onChange={(e) =>
+                onChange('expectedReturn', parseFloat(e.target.value))
+              }
               required
             />
           </p>
@@ -65,9 +57,9 @@ const UserInput = ({
             <label>Duration</label>
             <input
               type="number"
-              value={duration}
+              value={userInput.duration}
               min={1}
-              onChange={onDurationChanged}
+              onChange={(e) => onChange('duration', parseInt(e.target.value))}
               required
             />
           </p>

@@ -5,11 +5,13 @@ export interface YearResult {
   annualInvestment: number;
 }
 
-export function calculateInvestmentResults(args: {
+export interface UserInputArgs {
   initialInvestment: number;
   annualInvestment: number;
   expectedReturn: number;
   duration: number;
-}): YearResult[];
+}
+
+export function calculateInvestmentResults(args: UserInputArgs): YearResult[];
 
 export const formatter: Intl.NumberFormat;
